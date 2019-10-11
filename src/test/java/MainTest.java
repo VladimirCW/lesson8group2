@@ -1,5 +1,7 @@
 package test.java;
 
+import main.java.PO.CoursesPage;
+import main.java.PO.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,9 +16,14 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class MainTest {
     static WebDriver driver;
+    static WebDriverWait wait;
+    static WebElement preloader;
+    static HomePage homePage;
+    static CoursesPage coursesPage;
 
     @BeforeMethod
     public static void setUp() {
@@ -24,26 +31,18 @@ public class MainTest {
                 "chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        homePage = new HomePage(driver);
+        coursesPage = new CoursesPage(driver);
     }
 
     @Test
     public static void mainTest() throws InterruptedException {
-        driver.get("http://iteaua-develop.demo.gns-it.com/");
-        WebDriverWait wait = new WebDriverWait(driver, 60);
-        WebElement preloader = driver.findElement(By.id("preload-it"));
-        wait.until(ExpectedConditions.visibilityOf(preloader));
-        wait.until(ExpectedConditions.invisibilityOf(preloader));
-
-        WebElement javaCourses = driver.findElement(By.xpath("//h3[contains(text(), 'Java')]/../img"));
-        wait.until(ExpectedConditions.elementToBeClickable(javaCourses));
-        javaCourses.click();
-
-        WebElement payBtn = driver.findElement(By.xpath("//button[@name='roadFull_payOnce']"));
-        wait.until(ExpectedConditions.elementToBeClickable(payBtn));
-        payBtn.click();
-        wait.until(ExpectedConditions.visibilityOf(preloader));
-        wait.until(ExpectedConditions.invisibilityOf(preloader));
-        //Thread.sleep(2000);
+        homePage.isShown()
+                .selectLanguage("ru-RU")
+                .clickLogo()
+                .openCoursesJava();
+        coursesPage.clickPay();
+        assertTrue(coursesPage.checkIfBeresteikaIsSelected());
     }
 
     @AfterMethod
