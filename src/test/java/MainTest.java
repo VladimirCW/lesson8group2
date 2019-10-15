@@ -5,15 +5,16 @@ import main.java.PO.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -40,9 +41,32 @@ public class MainTest {
         homePage.isShown()
                 .selectLanguage("ru-RU")
                 .clickLogo()
-                .openCoursesJava();
+                .openCourses("C++");
         coursesPage.clickPay();
-        assertTrue(coursesPage.checkIfBeresteikaIsSelected());
+        assertTrue(coursesPage.checkIfLocationIsSelected("ВДНХ"));
+    }
+
+    @Test
+    public static void checkLanguages() {
+        homePage.isShown();
+        String arr[] = {"a", "b"};
+        List<String> list = new ArrayList<String>(Arrays.asList(arr));
+
+
+        List<String> expected = new ArrayList<String>();
+        expected.add("RU");
+        expected.add("UA");
+        //expected.add("EN");
+
+        boolean isPresent = true;
+        List<WebElement> elements = driver.findElements(By.xpath("(//ul[@class='lang'])[1]/li/a"));
+        for(WebElement el: elements) {
+            String text = el.getText();
+            if(!expected.contains(text)) {
+                isPresent = false;
+            }
+        }
+        assertTrue(isPresent);
     }
 
     @AfterMethod

@@ -25,9 +25,10 @@ public class CoursesPage {
         return this;
     }
 
-    public boolean checkIfBeresteikaIsSelected() {
-        WebElement beresteikaLocation = driver.findElement(By.id("location1"));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("location1")));
-        return beresteikaLocation.isSelected();
+    public boolean checkIfLocationIsSelected(String location) {
+        By element = By.xpath("//input[@id=//div[contains(text(), '" + location + "')]/../@for]");
+        WebElement webLocation = driver.findElement(element);
+        wait.until(ExpectedConditions.presenceOfElementLocated(element));
+        return webLocation.isSelected();
     }
 }

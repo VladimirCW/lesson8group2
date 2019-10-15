@@ -1,5 +1,7 @@
 package main.java.PO;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +12,8 @@ public class HomePage {
     public WebDriver driver;
     public WebDriverWait wait;
     public WebElement preloader;
+    public Logger logger = LogManager.getLogger(this.getClass());
+
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -21,6 +25,7 @@ public class HomePage {
         preloader = driver.findElement(By.id("preload-it"));
         wait.until(ExpectedConditions.visibilityOf(preloader));
         wait.until(ExpectedConditions.invisibilityOf(preloader));
+        logger.info("The page is shown");
         return this;
     }
 
@@ -46,8 +51,9 @@ public class HomePage {
         return this;
     }
 
-    public HomePage openCoursesJava() {
-        WebElement javaCourses = driver.findElement(By.xpath("//h3[contains(text(), 'Java')]/../img"));
+    public HomePage openCourses(String courseName) {
+        WebElement javaCourses = driver
+                .findElement(By.xpath("//h3[contains(text(), '" + courseName + "')]/../img"));
         wait.until(ExpectedConditions.elementToBeClickable(javaCourses));
         javaCourses.click();
         return this;
