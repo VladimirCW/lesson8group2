@@ -6,22 +6,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class CoursesPage {
-    public WebDriver driver;
-    public WebDriverWait wait;
-    public WebElement preloader;
+public class CoursesPage extends BasePage {
 
     public CoursesPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(this.driver, 10);
+        super(driver);
     }
 
     public CoursesPage clickPay() {
         WebElement payBtn = driver.findElement(By.xpath("//button[@name='roadFull_payOnce']"));
         wait.until(ExpectedConditions.elementToBeClickable(payBtn));
         payBtn.click();
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("preload-it"))));
-        wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("preload-it"))));
+        this.waitSpinner();
         return this;
     }
 

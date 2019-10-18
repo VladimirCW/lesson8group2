@@ -2,13 +2,16 @@ package test.java;
 
 import main.java.PO.CoursesPage;
 import main.java.PO.HomePage;
+import main.java.Utils.Screenshot;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.sql.Array;
@@ -36,14 +39,10 @@ public class MainTest {
         coursesPage = new CoursesPage(driver);
     }
 
-    @Test
-    public static void mainTest() throws InterruptedException {
+    @Test(dataProvider = "provider")
+    public static void mainTest(String lang) throws InterruptedException {
         homePage.isShown()
-                .selectLanguage("ru-RU")
-                .clickLogo()
-                .openCourses("C++");
-        coursesPage.clickPay();
-        assertTrue(coursesPage.checkIfLocationIsSelected("ВДНХ"));
+                .selectLanguage(lang);
     }
 
     @Test
@@ -70,7 +69,16 @@ public class MainTest {
     }
 
     @AfterMethod
-    public static void tearDown() {
+    public static void tearDown(ITestResult result) {
         driver.quit();
+    }
+
+    @DataProvider
+    public Object[][] provider() {
+        return new Object[][]{
+                {"ru-RU"}/*,
+                {"en-GB"},
+                {"uk"}*/
+        };
     }
 }
