@@ -1,5 +1,6 @@
 package main.java.PO;
 
+import io.qameta.allure.Step;
 import main.java.Utils.PropertyLoader;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -17,7 +18,7 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-
+    @Step("Open Home page")
     public HomePage isShown() {
         logger.trace("Trace log");
         logger.debug("Debug log sefssdfasdfsdf sdffsda fsdafasdfsd \n fsdfasfasdfasdfasdfa\n sdfgasdfdasfsdf\n ffasdfsd\nfafsdf");
@@ -32,6 +33,7 @@ public class HomePage extends BasePage {
         return this;
     }
 
+    @Step("Open lahguage '{lang}'")
     public HomePage selectLanguage(String lang) {
         logger.info("Select language '" + lang + "'");
         WebElement ruLanguage = driver.findElement(By.xpath("(//a[@hreflang='" + lang + "'])[1]"));
