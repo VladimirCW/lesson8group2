@@ -52,6 +52,7 @@ public class MainTest extends TestSetUp {
             "<li> Second </li>" +
             "</ul>" +
             "<a href = 'https://google.com'>Some link </a>")
+    @TmsLink("TMS-1")
     @Test
     public void checkLanguages() {
         homePage.isShown();
