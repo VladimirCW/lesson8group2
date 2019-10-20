@@ -1,7 +1,10 @@
 package test.java;
 
+import io.qameta.allure.Attachment;
 import main.java.PO.CoursesPage;
 import main.java.PO.HomePage;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestContext;
@@ -23,6 +26,12 @@ public class TestSetUp {
 
     @AfterMethod
     public void tearDown(ITestResult result) {
+        saveScreenshot();
         driver.quit();
+    }
+
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public byte[] saveScreenshot() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 }

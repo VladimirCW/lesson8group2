@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Ignored tests",
+    "matchedStatuses": [
+      "skipped"
+    ]
+  },
+  {
+    "name": "No such element error",
+    "messageRegex": "(.*java.lang.AssertionError: null.*)",
+    "matchedStatuses": [
+      "broken",
+      "failed"
+    ],
+    "flaky": true
+  }
+]

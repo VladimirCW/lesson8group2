@@ -38,7 +38,7 @@ public class MainTest extends TestSetUp {
     public void mainTest(String lang) throws InterruptedException {
         homePage.isShown()
                 .selectLanguage(lang);
-        //fail();
+        fail();
     }
 
     @Issues({
@@ -46,7 +46,12 @@ public class MainTest extends TestSetUp {
             @Issue("AAA-4")
     })
     @Story("Negative test")
-    @Description("This is a second test of mine")
+    @Description("<h1> Title</h1>" +
+            "<ul>" +
+            "<li> First </li>" +
+            "<li> Second </li>" +
+            "</ul>" +
+            "<a href = 'https://google.com'>Some link </a>")
     @Test
     public void checkLanguages() {
         homePage.isShown();
