@@ -2,17 +2,16 @@ package test.java;
 
 import main.java.PO.CoursesPage;
 import main.java.PO.HomePage;
+import main.java.Utils.RetryAnalyzer;
 import main.java.Utils.Screenshot;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -30,11 +29,12 @@ public class MainTest {
     static CoursesPage coursesPage;
 
     @BeforeMethod
-    public static void setUp() {
+    public static void setUp(ITestContext context) {
         System.setProperty("webdriver.chrome.driver",
                 "chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        context.setAttribute("webDriver", driver);
         homePage = new HomePage(driver);
         coursesPage = new CoursesPage(driver);
     }
@@ -43,6 +43,10 @@ public class MainTest {
     public static void mainTest(String lang) throws InterruptedException {
         homePage.isShown()
                 .selectLanguage(lang);
+        if (lang.equals("ru-RU")) {
+            assertTrue(false);
+        }
+
     }
 
     @Test
@@ -59,9 +63,9 @@ public class MainTest {
 
         boolean isPresent = true;
         List<WebElement> elements = driver.findElements(By.xpath("(//ul[@class='lang'])[1]/li/a"));
-        for(WebElement el: elements) {
+        for (WebElement el : elements) {
             String text = el.getText();
-            if(!expected.contains(text)) {
+            if (!expected.contains(text)) {
                 isPresent = false;
             }
         }
@@ -70,6 +74,8 @@ public class MainTest {
 
     @AfterMethod
     public static void tearDown(ITestResult result) {
+        Screenshot screenshot = new Screenshot(driver);
+        screenshot.saveScreenshot(result);
         driver.quit();
     }
 

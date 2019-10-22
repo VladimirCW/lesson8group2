@@ -1,14 +1,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="TestSuite">
-    <!--<listeners>
+
+<suite name="FirstSuit">
+    <listeners>
+        <listener class-name="main.java.Utils.AnnotationTransformer"/>
         <listener class-name="main.java.Utils.TestListener"/>
-    </listeners>-->
-    <test name="TestTest">
+    </listeners>
+    <test name="FirstTest">
         <classes>
             <class name="test.java.MainTest">
-                <!--<methods>
-                    <include name="checkLanguages"/>
-                </methods>-->
+                <methods>
+                    <include name="mainTest"/>
+                </methods>
             </class>
         </classes>
     </test>
