@@ -1,5 +1,8 @@
 package test.java;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import main.java.PO.CoursesPage;
 import main.java.PO.HomePage;
 import main.java.Utils.RetryAnalyzer;
@@ -21,6 +24,8 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+@Epic("Cart menu")
+@Feature("Add product")
 public class MainTest {
     static WebDriver driver;
     static WebDriverWait wait;
@@ -39,14 +44,13 @@ public class MainTest {
         coursesPage = new CoursesPage(driver);
     }
 
-    @Test(dataProvider = "provider")
-    public static void mainTest(String lang) throws InterruptedException {
+    @Story("Poisitive test")
+    @Test()
+    public static void mainTest() throws InterruptedException {
+        String[] str = {"ru-RU", "uk", "en-GB"};
+        int rand = (int) (Math.random() * (str.length + 1) );
         homePage.isShown()
-                .selectLanguage(lang);
-        if (lang.equals("ru-RU")) {
-            assertTrue(false);
-        }
-
+                .selectLanguage(str[rand]);
     }
 
     @Test
