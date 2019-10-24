@@ -27,4 +27,11 @@ public class CatTest {
         int expected = -2;
         assertEquals(actual, expected);
     }
+
+    @Test
+    public void test3() {
+        int actual = cat.min(0, 0);
+        int expected = 0;
+        assertEquals(actual, expected);
+    }
 }
