@@ -1,15 +1,11 @@
 package test.java;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import main.java.PO.CoursesPage;
 import main.java.PO.HomePage;
 import main.java.Utils.RetryAnalyzer;
 import main.java.Utils.Screenshot;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestContext;
@@ -27,14 +23,12 @@ import static org.testng.Assert.assertTrue;
 @Epic("Cart menu")
 @Feature("Add product")
 public class MainTest {
-    static WebDriver driver;
-    static WebDriverWait wait;
-    static WebElement preloader;
-    static HomePage homePage;
-    static CoursesPage coursesPage;
+     WebDriver driver;
+     HomePage homePage;
+     CoursesPage coursesPage;
 
     @BeforeMethod
-    public static void setUp(ITestContext context) {
+    public void setUp(ITestContext context) {
         System.setProperty("webdriver.chrome.driver",
                 "chromedriver.exe");
         driver = new ChromeDriver();
@@ -44,9 +38,15 @@ public class MainTest {
         coursesPage = new CoursesPage(driver);
     }
 
+    @Link("https://google.com")
+    @TmsLink("AAA-1")
+    @Issues({
+            @Issue("B-1"),
+            @Issue("B-2")
+    })
     @Story("Poisitive test")
     @Test()
-    public static void mainTest() throws InterruptedException {
+    public void mainTest() throws InterruptedException {
         String[] str = {"ru-RU", "uk", "en-GB"};
         int rand = (int) (Math.random() * (str.length + 1) );
         homePage.isShown()
@@ -54,7 +54,7 @@ public class MainTest {
     }
 
     @Test
-    public static void checkLanguages() {
+    public void checkLanguages() {
         homePage.isShown();
         String arr[] = {"a", "b"};
         List<String> list = new ArrayList<String>(Arrays.asList(arr));
@@ -77,9 +77,8 @@ public class MainTest {
     }
 
     @AfterMethod
-    public static void tearDown(ITestResult result) {
-        Screenshot screenshot = new Screenshot(driver);
-        screenshot.saveScreenshot(result);
+    public void tearDown(ITestResult result) {
+        saveScreenshot();
         driver.quit();
     }
 
@@ -90,5 +89,10 @@ public class MainTest {
                 {"en-GB"},
                 {"uk"}*/
         };
+    }
+
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public byte[] saveScreenshot() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 }
