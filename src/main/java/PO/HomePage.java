@@ -10,6 +10,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class HomePage extends BasePage {
 
     public Logger logger = LogManager.getLogger(this.getClass());
@@ -20,13 +24,6 @@ public class HomePage extends BasePage {
 
     @Step("Open home page")
     public HomePage isShown() {
-        logger.trace("Trace log");
-        logger.debug("Debug log sefssdfasdfsdf sdffsda fsdafasdfsd \n fsdfasfasdfasdfasdfa\n sdfgasdfdasfsdf\n ffasdfsd\nfafsdf");
-        logger.info("Info log");
-        logger.warn("Warn log");
-        logger.error("Error log");
-        logger.fatal("Fatal log");
-
         driver.get(PropertyLoader.loadProperty("url"));
         this.waitSpinner();
         logger.info("The page is shown");
@@ -58,5 +55,19 @@ public class HomePage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(javaCourses));
         javaCourses.click();
         return this;
+    }
+
+    public boolean languagesArePresent() {
+        String arr[] = {"RU", "UA", "EN"};
+        List<String> list = new ArrayList<String>(Arrays.asList(arr));
+        boolean isPresent = true;
+        List<WebElement> elements = driver.findElements(By.xpath("(//ul[@class='lang'])[1]/li/a"));
+        for (WebElement el : elements) {
+            String text = el.getText();
+            if (!list.contains(text)) {
+                isPresent = false;
+            }
+        }
+        return isPresent;
     }
 }

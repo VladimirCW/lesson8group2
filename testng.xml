@@ -8,9 +8,6 @@
     <test name="FirstTest">
         <classes>
             <class name="test.java.MainTest">
-                <methods>
-                    <include name="mainTest"/>
-                </methods>
             </class>
         </classes>
     </test>
