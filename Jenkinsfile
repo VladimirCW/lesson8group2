@@ -4,7 +4,7 @@ pipeline {
     stages{
         stage('Preparation') {
             steps {
-                git 'https://github.com/VladimirCW/lesson8_PO.git'
+                git 'https://github.com/VladimirCW/lesson8group2.git'
             }
         }
         stage('Unit tests') {
