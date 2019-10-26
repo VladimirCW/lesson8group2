@@ -17,5 +17,10 @@ pipeline {
                 bat 'mvn clean -DsuiteXmlFile=testng.xml test'
             }
         }
+        stage("Allure report") {
+            steps{
+                bat 'mvn site'
+            }
+        }
     }
 }
