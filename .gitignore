@@ -5,3 +5,4 @@ target/
 logs/
 screenshots/
 allure-results/
+allure-report/
