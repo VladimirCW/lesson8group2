@@ -32,6 +32,19 @@ public class MainTest extends TestSetUp{
         assertTrue(homePage.languagesArePresent());
     }
 
+    @Link("https://google.com")
+    @TmsLink("AAA-1")
+    @Issues({
+            @Issue("B-1"),
+            @Issue("B-2")
+    })
+    @Story("Negative test")
+    @Test
+    public void checkLanguagesNegative() {
+        homePage.isShown();
+        assertTrue(false);
+    }
+
     @DataProvider
     public Object[][] provider() {
         return new Object[][]{

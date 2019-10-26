@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Ignored tests",
+    "matchedStatuses": ["skipped"]
+  },
+  {
+    "name": "Assertion error",
+    "matchedStatuses": ["broken", "failed"],
+    "messageRegex": ".*expected.*but found.*"
+  }
+]
