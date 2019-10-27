@@ -30,7 +30,7 @@ pipeline {
                 ])
                 emailext body: 'Test email',
                         subject: "[Jenkins] Test Execution Summary",
-                        to: "newtryfashion2018@gmail.com"
+                        to: "vova0996577027@gmail.com"
             }
         }
     }
