@@ -28,7 +28,7 @@ pipeline {
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'allure-results']]
                 ])
-                emailext body: '''${SCRIPT, template="allure-report.groovy"}''',
+                emailext body: 'Test email',
                         subject: "[Jenkins] Test Execution Summary",
                         to: "vova0996577027@gmail.com"
             }
