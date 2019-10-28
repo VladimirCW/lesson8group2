@@ -12,11 +12,11 @@ pipeline {
                 bat 'mvn clean -DsuiteXmlFile=unitTests.xml test'
             }
         }
-        stage('UI tests') {
-            steps{
-                bat 'mvn clean -DsuiteXmlFile=testng.xml test'
-            }
-        }
+        //stage('UI tests') {
+        //    steps{
+        //        bat 'mvn clean -DsuiteXmlFile=testng.xml test'
+        //    }
+        //}
     }
     post{
         always{
