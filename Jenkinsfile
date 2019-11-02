@@ -30,7 +30,7 @@ pipeline {
                 ])
                 emailext body: '''${SCRIPT, template="allure-report.groovy"}''',
                         subject: "Jenkins Build result: ${currentBuild.currentResult}. Job '${env.JOB_NAME}'. Build # ${env.BUILD_NUMBER}",
-                        to: "vova0996577028@gmail.com"
+                        to: "vova0996577028@gmail.com, vova0996577027@gmail.com"
             }
         }
     }
