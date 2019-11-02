@@ -30,7 +30,7 @@ pipeline {
                 ])
                 emailext body: '''${SCRIPT, template="allure-report.groovy"}''',
                         subject: "[Jenkins] Test Execution Summary",
-                        to: "vova0996577027@gmail.com"
+                        to: "vova0996577028@gmail.com"
             }
         }
     }
