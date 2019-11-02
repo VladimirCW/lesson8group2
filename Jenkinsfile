@@ -29,7 +29,7 @@ pipeline {
                         results: [[path: 'allure-results']]
                 ])
                 emailext body: '''${SCRIPT, template="allure-report.groovy"}''',
-                        subject: "[Jenkins] Test Execution Summary",
+                        subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
                         to: "vova0996577028@gmail.com"
             }
         }
