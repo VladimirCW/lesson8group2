@@ -27,7 +27,7 @@ public class TestSetUp {
 
     @BeforeMethod
     public void setUp(ITestContext context) throws MalformedURLException {
-        DesiredCapabilities desiredCapabilities = DesiredCapabilities.
+        /*DesiredCapabilities desiredCapabilities = DesiredCapabilities.
                 chrome();
         desiredCapabilities.setBrowserName("chrome");
         ChromeOptions options = new ChromeOptions();
@@ -40,11 +40,11 @@ public class TestSetUp {
         desiredCapabilities.setCapability("enableVNC", true);
         driver = new RemoteWebDriver(
                 new URL(PropertyLoader.loadProperty("gridhub")),
-                desiredCapabilities);
+                desiredCapabilities);*/
 
-        /*System.setProperty("webdriver.chrome.driver",
+        System.setProperty("webdriver.chrome.driver",
                 "chromedriver.exe");
-        driver = new ChromeDriver();*/
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         context.setAttribute("webDriver", driver);
     }
