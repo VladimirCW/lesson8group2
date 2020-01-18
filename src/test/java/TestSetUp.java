@@ -23,7 +23,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class TestSetUp {
-    WebDriver driver;
+    public WebDriver driver;
 
     @BeforeMethod
     public void setUp(ITestContext context) throws MalformedURLException {
@@ -56,7 +56,7 @@ public class TestSetUp {
     }
 
     @Attachment(value = "Page screenshot", type = "image/png")
-    public byte[] saveScreenshot() {
+    private byte[] saveScreenshot() {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 

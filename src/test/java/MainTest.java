@@ -1,22 +1,18 @@
 package test.java;
 
 import io.qameta.allure.*;
-import main.java.PO.CoursesPage;
 import main.java.PO.HomePage;
-import org.testng.ITestContext;
 import org.testng.annotations.*;
 import static org.testng.Assert.assertTrue;
 
 @Epic("Cart menu")
 @Feature("Add product")
 public class MainTest extends TestSetUp{
-    HomePage homePage;
-    CoursesPage coursesPage;
+    private HomePage homePage;
 
     @BeforeMethod
-    public void setUpTest(ITestContext context) {
+    public void setUpTest() {
         homePage = new HomePage(this.driver);
-        coursesPage = new CoursesPage(this.driver);
     }
 
     @Link("https://google.com")

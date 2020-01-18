@@ -7,10 +7,7 @@
     </listeners>
     <test name="FirstTest">
         <classes>
-            <class name="test.java.MainTest">
-                <methods>
-                    <include name="checkLanguages"/>
-                </methods>
+            <class name="test.java.makeScreenshots.MainPageScreens">
             </class>
         </classes>
     </test>
